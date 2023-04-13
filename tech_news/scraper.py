@@ -22,7 +22,7 @@ def fetch(url):
 # Requisito 2
 def scrape_updates(html):
     selector = Selector(text=html)
-    news_links = selector.css('.entry-title::attr(href)').getall()
+    news_links = selector.css('.entry-title a::attr(href)').getall()
     return news_links
 
 
