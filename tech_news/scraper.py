@@ -3,6 +3,7 @@ def fetch(url):
     """Seu código deve vir aqui"""
 # bora
 
+
 # Requisito 2
 def scrape_updates(html_content):
     """Seu código deve vir aqui"""
