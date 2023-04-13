@@ -1,7 +1,7 @@
 from parsel import Selector
 import requests
 import time
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 # Requisito 1
@@ -28,7 +28,12 @@ def scrape_updates(html):
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    soup = BeautifulSoup(html_content, "html.parser")
+    next_link = soup.find("a", class_="next page-numbers")
+    if next_link:
+        return next_link["href"]
+    else:
+        return None
 
 
 # Requisito 4
