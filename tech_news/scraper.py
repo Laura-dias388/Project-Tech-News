@@ -1,5 +1,7 @@
+from parsel import Selector
 import requests
 import time
+# from bs4 import BeautifulSoup
 
 
 # Requisito 1
@@ -18,8 +20,10 @@ def fetch(url):
 
 
 # Requisito 2
-def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
+def scrape_updates(html):
+    selector = Selector(text=html)
+    news_links = selector.css('.entry-title::attr(href)').getall()
+    return news_links
 
 
 # Requisito 3
