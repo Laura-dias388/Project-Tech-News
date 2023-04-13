@@ -2,6 +2,7 @@ from parsel import Selector
 import requests
 import time
 from bs4 import BeautifulSoup
+import re
 
 
 # Requisito 1
@@ -38,7 +39,25 @@ def scrape_next_page_link(html_content):
 
 # Requisito 4
 def scrape_news(html_content):
-    """Seu código deve vir aqui"""
+    soup = BeautifulSoup(html_content, 'html.parser')
+    url = soup.find('link', rel='canonical')['href']
+    title = soup.find('h1', class_='entry-title').text.strip()
+    timestamp = soup.find('li', class_='meta-date').text.strip()
+    writer = soup.find('a', class_='url fn n').text.strip()
+    reading_time = int(re.findall(r'\d+', soup.find(
+        'li', class_='meta-reading-time').text)[0])
+    summary = soup.find('div', class_='entry-content').p.text.strip()
+    category = soup.find('span', class_='label').text.strip()
+
+    return {
+        "url": url,
+        "title": title,
+        "timestamp": timestamp,
+        "writer": writer,
+        "reading_time": reading_time,
+        "summary": summary,
+        "category": category,
+    }
 
 
 # Requisito 5
