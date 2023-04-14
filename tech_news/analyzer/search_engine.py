@@ -22,5 +22,5 @@ def search_by_date(date):
 
 # Requisito 9
 def search_by_category(category):
-    query = {"categories": {"$regex": category.capitalize()}}
-    return [(n["title"], n["url"]) for n in search_news(query)]
+    get_list = search_news({"category": category.capitalize()})
+    return list(map(lambda news: (news['title'], news['url']), get_list))
